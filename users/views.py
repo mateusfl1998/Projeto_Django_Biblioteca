@@ -63,7 +63,11 @@ def login_validation_view(request):
         '''Se usuario nao existe no sistema'''
         return redirect('/auth/login/?status=1')
 
-    if len (user_email) == 1:
-        request.session['user']
+    if len (user_email) > 0 :
+        request.session['user_email'] = user_email[0].id
+        return redirect(reverse_lazy('home')) 
 
+def logout(request):
+    request.session.flush()
+    return redirect( 'home') 
 
