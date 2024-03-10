@@ -56,16 +56,11 @@ def login_validation_view(request):
     password = request.GET.get('password')
     password = sha256(password.encode()).hexdigest()
 
-    user_email = User.objects.filter(email=email).filter(password=password)
+    user = User.objects.filter(email=email, password=password)
 
-    print(user_email)
-    if len(user_email) == 0:
-        '''Se usuario nao existe no sistema'''
-        return redirect('/auth/login/?status=1')
-
-    if len (user_email) > 0 :
-        request.session['user_email'] = user_email[0].id
-        return redirect(reverse_lazy('home')) 
+    if user.exists():  # Verifica se pelo menos um usuário foi encontrado
+        request.session['user'] = user[0].id
+    return redirect('home')
 
 def logout(request):
     request.session.flush()

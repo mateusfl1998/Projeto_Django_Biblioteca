@@ -1,10 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
 from datetime import date 
 
 
 class Author(models.Model):
     name = models.CharField(max_length = 100, verbose_name="Nome do Autor")
+    user = models.ForeignKey(  User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -26,11 +27,14 @@ class LoanInformations(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=150)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user4 = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Books(models.Model):
     name = models.CharField(max_length = 100, verbose_name = 'Nome do Livro:'  )
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name = 'Autor')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_cad = models.DateField(default = date.today, verbose_name = 'Data do Cadastro' )
-    registered_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = 'Cadastrado por')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = 'Cadastrado por')

@@ -7,6 +7,6 @@ urlpatterns = [
     path('login_validation/', login_validation_view, name='login_validation'),
     path('registry/', registry_view, name='registry'),
     path('registry_validation/', registry_validation_view, name='registry_validation'),
-    path('logout', logout, name='logout     '),
+    path('logout', logout, name='logout'),
 ]
 

@@ -5,4 +5,25 @@
 {% block content %}
 
 
-{% endblock %}
+
+<div class="d-flex  bg-secondary mt-3 flex-row mb-3 "  >
+{% for book in books %}
+    <div class="card m-2" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.name }}</h5>
+          <p class="card-text">Descrição sobre o livro aqui!</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Categoria:</b> {{book.category}}</li>
+          <li class="list-group-item"><b>Autor:</b> {{book.author}}</li>
+          <li class="list-group-item"><b>Data do Cadastro:</b> {{book.date_cad}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div> 
+{% endfor%}
+
+
+{% endblock content %}
