@@ -9,7 +9,7 @@ def home_view(request):
         user = Users.objects.get (id = request.session['user'])
         books = Books.objects.filter(user=user.id)
         loan_informations = LoanInformations.objects.filter(book=books[0].id)
-        
+            
         context = {'user':user, 'books':books, 'loan_informations':loan_informations} 
         return render(request, 'index.html', context)
     else:
