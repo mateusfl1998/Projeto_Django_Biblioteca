@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import User
+from .models import Users
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from hashlib import sha256
@@ -30,7 +30,7 @@ def registry_validation_view(request):
 
     """se o usuario já existe no banco de dados, se existir ele vai ser 
      redirecionado para a ágina de login """
-    user = User.objects.filter(email=email)
+    user = Users.objects.filter(email=email)
     # if len(user) < 0:   
     #     return redirect(reverse_lazy('login'))
     
@@ -43,7 +43,7 @@ def registry_validation_view(request):
     
     try: 
         password = sha256(password.encode()).hexdigest()
-        user = User(name = name, email = email, password = password)
+        user = Users(name = name, email = email, password = password)
         user.save()
         return redirect ('/auth/registry/?status=0') 
         sleep(3)
@@ -56,7 +56,7 @@ def login_validation_view(request):
     password = request.GET.get('password')
     password = sha256(password.encode()).hexdigest()
 
-    user = User.objects.filter(email=email, password=password)
+    user = Users.objects.filter(email=email, password=password)
 
     if user.exists():  # Verifica se pelo menos um usuário foi encontrado
         request.session['user'] = user[0].id

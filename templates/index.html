@@ -16,11 +16,12 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><b>Categoria:</b> {{book.category}}</li>
           <li class="list-group-item"><b>Autor:</b> {{book.author}}</li>
-          <li class="list-group-item"><b>Data do Cadastro:</b> {{book.date_cad}}</li>
+          <li class="list-group-item"><b>Data da Locação:</b> {{loan.information.id}}</li>
+          <li class="list-group-item"><b>Data de Devolução:</b> {{loan.information.id}}</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <a href="#" class="card-link">Detalhes</a>
+          <a href="#" class="card-link">Devolver Livro!</a>
         </div>
       </div> 
 {% endfor%}

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import User
+from .models import Users
 
 
 
-@admin.register(User)
+@admin.register(Users)
 class UserAdmin(admin.ModelAdmin):
     readonly_fields = ('name', 'email', 'password')
     
