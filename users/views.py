@@ -11,8 +11,10 @@ from time import sleep
 
 
 def login_view(request):
+    if request.session.get('user'):
+        return redirect( 'home')
+        print('user')
     status = request.GET.get('status')
-
     return render(request, 'login.html', {'status':status})
 
 
@@ -64,5 +66,5 @@ def login_validation_view(request):
 
 def logout(request):
     request.session.flush()
-    return redirect( 'home') 
+    return redirect( 'login') 
 

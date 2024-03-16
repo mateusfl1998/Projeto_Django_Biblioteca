@@ -19,6 +19,12 @@ class RenterInformations(models.Model):
     phone_number = models.IntegerField()
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Informações de Locatário'
+    
+    def __str__(self):
+        return f'{self.name}| {self.phone_number} '
+
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -38,7 +44,11 @@ class Books(models.Model):
         return self.name
 
 class LoanInformations(models.Model):
+    renter_information = models.ForeignKey(RenterInformations, on_delete=models.DO_NOTHING)
     loan_date = models.DateField()
     return_data = models.DateField()
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     book = models.ForeignKey(Books, on_delete=models.CASCADE )
+    
+def __str__(self):
+    return f'{self.book}'

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+<BR>
+Nome:<input style = "width:50%" class="form-control" type="text" value="{{book.name}}">
+Autor:<input style = "width:40%"class="form-control" type="text" value="{{book.author}}">
+{% comment %} Categoria:<input style = "width:40%"class="form-control" type="text" value="{{book.category}}"> {% endcomment %}
+Categoria: 
+
+ <select name="a" class="form-control" widht="20%">   
+        {% for i in category%} 
+                {% if i == book.category%}
+                <option select>{{i}}</option>
+                {% endif%}
+        {% endfor%}
+        {% for i in category%}
+            {% if i != book.category%}
+        <option >{{i}}</option>
+        {%endif%}
+        {%endfor%}
+</select>
+
+{% comment %} Categoria:<input style = "width:40%" class="form-control" type="text" value="{{book.category}}"> {% endcomment %}
+Data do Emprestimo:<input style = "width:40%" class="form-control" type="text" value="{{loan.loan_date}}">
+Data de Devolução:<input style = "width:40%" class="form-control" type="text" value="{{loan.return_data}}">
+<h1>ID do livro: {{book.id}}</h1>
+
+</div>
+{% endblock content %}
