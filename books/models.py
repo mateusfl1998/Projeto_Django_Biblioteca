@@ -49,6 +49,12 @@ class LoanInformations(models.Model):
     return_data = models.DateField()
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     book = models.ForeignKey(Books, on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.renter_information
+
+    class Meta:
+        verbose_name = 'Empréstimo'
     
 def __str__(self):
     return f'{self.book}'

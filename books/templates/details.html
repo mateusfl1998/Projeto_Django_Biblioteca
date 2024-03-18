@@ -1,15 +1,19 @@
 {% extends "base.html" %}
+{% load filtros%}
 
 {% block content %}
 
 <div class="container">
 <BR>
 Nome:<input style = "width:50%" class="form-control" type="text" value="{{book.name}}">
+<br>
 Autor:<input style = "width:40%"class="form-control" type="text" value="{{book.author}}">
 {% comment %} Categoria:<input style = "width:40%"class="form-control" type="text" value="{{book.category}}"> {% endcomment %}
+<br>
 Categoria: 
 
- <select name="a" class="form-control" widht="20%">   
+<br>
+ <select name="a" class="form-control" widht="10%">   
         {% for i in category%} 
                 {% if i == book.category%}
                 <option select>{{i}}</option>
@@ -22,10 +26,13 @@ Categoria:
         {%endfor%}
 </select>
 
-{% comment %} Categoria:<input style = "width:40%" class="form-control" type="text" value="{{book.category}}"> {% endcomment %}
+<br>
 Data do Emprestimo:<input style = "width:40%" class="form-control" type="text" value="{{loan.loan_date}}">
+<br>
 Data de Devolução:<input style = "width:40%" class="form-control" type="text" value="{{loan.return_data}}">
-<h1>ID do livro: {{book.id}}</h1>
+<br>
+Tempo de duração do empréstimo: <b>{{loan.loan_date|teste:loan.return_data}} Dias       </b>
+
 
 </div>
 {% endblock content %}

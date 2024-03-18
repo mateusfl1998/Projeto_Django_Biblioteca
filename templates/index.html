@@ -16,9 +16,8 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><b>Categoria:</b> {{book.category}}</li>
           <li class="list-group-item"><b>Autor:</b> {{book.author}}</li>
-          <li class="list-group-item"><b>Data da Locação:{{book.data_locação}}</b> </li>
-          <li class="list-group-item"><b>Data da Locação:{{book.data_de_devolucao}}</b> </li>
-          <li class="list-group-item"><b>ID: {{book.id}}</b></li>
+          <li class="list-group-item"><b>Data da Locação:</b>{{book.data_locação}} </li>
+          <li class="list-group-item"><b>Data da Locação:</b>{{book.data_de_devolucao}} </li>
         </ul>
         <div class="card-body">
           <a href="{% url 'detail_book' book.id %}" class="card-link">Ver Detalhes!</a>

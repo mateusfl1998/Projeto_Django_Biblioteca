@@ -28,3 +28,4 @@ def home_view(request):
         return redirect ('/auth/login/?status=2')
     
 
+
