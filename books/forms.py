@@ -5,6 +5,13 @@ class CadastroNovoLivro(forms.ModelForm):
     class Meta:
         model = Books
         fields = "__all__"
-    
-# class CadastroNovoLivro(forms.Form):
-#     name = forms.CharField(max_length = 100)
+
+    def __init__(self,user,*args, **kwargs, ):
+        super().__init__(*args,**kwargs)
+        # self.fields['user'].widget = forms.HiddenInput()
+        self.fields['user'].initial = user   
+        self.fields['user'].widget = forms.HiddenInput()
+        self.fields['category'].queryset = Category.objects.filter(user=user)
+        self.fields['author'].queryset = Author.objects.filter(user=user)
+            
+        

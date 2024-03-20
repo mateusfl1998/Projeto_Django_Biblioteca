@@ -10,11 +10,12 @@ def home_view(request):
     if request.session.get('user'):
         user = Users.objects.get (id = request.session['user'])       
         books = Books.objects.filter(user=user.id)
-        form = CadastroNovoLivro()
+        form =  CadastroNovoLivro(user=user)
+        form.fields['name'].initial = 'Digite o nome do livro'
         list_of_books = []
         for book in books:
             loan_informations = LoanInformations.objects.filter(id=book.id)
-            list_of_books.append({
+            list_of_books.append({a
             'name':book.name,
             'author': book.author,
             'category':book.category,
