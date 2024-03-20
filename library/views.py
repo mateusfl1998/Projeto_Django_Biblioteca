@@ -2,20 +2,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from users.models import Users
-from books.models import Books,LoanInformations
+from books.models import Books,LoanInformations, Category, Author
 from books.forms import CadastroNovoLivro
 
 
 def home_view(request):
     if request.session.get('user'):
-        user = Users.objects.get (id = request.session['user'])       
+        user = Users.objects.get (id = request.session['user'])
+        print(user.id)    
         books = Books.objects.filter(user=user.id)
-        form =  CadastroNovoLivro(user=user)
-        form.fields['name'].initial = 'Digite o nome do livro'
+        form =  CadastroNovoLivro()
+        form.fields['user'].initial = user.id
+        form.fields['category'].queryset = Category.objects.filter(user=user.id)
+        form.fields['author'].queryset = Author.objects.filter(user=user.id)
+        
         list_of_books = []
         for book in books:
             loan_informations = LoanInformations.objects.filter(id=book.id)
-            list_of_books.append({a
+            list_of_books.append({
             'name':book.name,
             'author': book.author,
             'category':book.category,
@@ -23,17 +27,15 @@ def home_view(request):
             'data_locação': loan_informations[0].loan_date,
             'data_de_devolucao':loan_informations[0].return_data
             })
-            print(book)
+
         context = {'user':user, 'books':list_of_books, 'form':form} 
-        for book in books:
-            print(book)
         return render(request, 'index.html', context)
     else:
         return redirect ('/auth/login/?status=2')
     
 def cadastrar_livro(request):
     if request.method == "POST":
-        form = CadastroNovoLivro(request.POST)
+        form = CadastroNovoLivro(request.POST)  
     
 
 

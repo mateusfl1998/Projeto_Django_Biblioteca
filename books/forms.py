@@ -6,12 +6,10 @@ class CadastroNovoLivro(forms.ModelForm):
         model = Books
         fields = "__all__"
 
-    def __init__(self,user,*args, **kwargs, ):
+    def __init__(self,*args, **kwargs, ):
         super().__init__(*args,**kwargs)
         # self.fields['user'].widget = forms.HiddenInput()
-        self.fields['user'].initial = user   
-        self.fields['user'].widget = forms.HiddenInput()
-        self.fields['category'].queryset = Category.objects.filter(user=user)
-        self.fields['author'].queryset = Author.objects.filter(user=user)
+        self.fields['category'].label = "Categoria"
+        
             
         
