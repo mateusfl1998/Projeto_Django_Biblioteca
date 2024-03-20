@@ -10,6 +10,13 @@ class CadastroNovoLivro(forms.ModelForm):
         super().__init__(*args,**kwargs)
         # self.fields['user'].widget = forms.HiddenInput()
         self.fields['category'].label = "Categoria"
-        
+
+class NewCategoryForm (forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = "__all__"
+        widgets = {'user':forms.HiddenInput()}
+
+    
             
         

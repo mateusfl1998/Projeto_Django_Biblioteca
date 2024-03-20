@@ -18,14 +18,11 @@ def home_view(request):
         
         list_of_books = []
         for book in books:
-            loan_informations = LoanInformations.objects.filter(id=book.id)
             list_of_books.append({
             'name':book.name,
             'author': book.author,
             'category':book.category,
             'id': book.pk,
-            'data_locação': loan_informations[0].loan_date,
-            'data_de_devolucao':loan_informations[0].return_data
             })
 
         context = {'user':user, 'books':list_of_books, 'form':form} 
