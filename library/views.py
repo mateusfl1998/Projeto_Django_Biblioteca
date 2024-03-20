@@ -35,8 +35,10 @@ def home_view(request):
     
 def cadastrar_livro(request):
     if request.method == "POST":
-        form = CadastroNovoLivro(request.POST)  
-    
+        form = CadastroNovoLivro(request.POST)
+        if form.is_valid():
+            form.save()  
+            return redirect('home')    
 
 
     return HttpResponse(form)
