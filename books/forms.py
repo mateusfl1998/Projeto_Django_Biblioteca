@@ -17,6 +17,11 @@ class NewCategoryForm (forms.ModelForm):
         fields = "__all__"
         widgets = {'user':forms.HiddenInput()}
 
+class NewAuthorForm (forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = "__all__"
+        widgets = {'user': forms.HiddenInput()}
     
             
         

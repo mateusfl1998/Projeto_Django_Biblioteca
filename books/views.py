@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponse
-from books.models import Books, LoanInformations, Category
+from books.models import Books, LoanInformations, Category, Author
 from django.views.generic import DetailView, CreateView
-from .forms import NewCategoryForm
+from .forms import NewCategoryForm, NewAuthorForm
 from django.urls import reverse_lazy
 
    
@@ -34,3 +34,18 @@ class NewCategory(CreateView):
         initial = super().get_initial()
         initial['user'] = self.user_id  # Passa o valor de self.user_id como valor inicial para o campo 'user'
         return initial
+
+class NewAuthor(CreateView):
+    model = Author
+    form_class = NewAuthorForm
+    template_name = 'new_author.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.user_id = request.session.get('user')
+        print(self.user_id)
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_initial(self):
+        initial = {'user':self.user_id}
+        return initial
+    
