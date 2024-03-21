@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from users.models import Users
 from books.models import Books,LoanInformations, Category, Author
 from books.forms import CadastroNovoLivro
+from django.urls import reverse_lazy
 
 
 def home_view(request):
@@ -40,4 +41,6 @@ def cadastrar_livro(request):
 
     return HttpResponse(form)
 
-
+def excluirlivro(request, pk):
+    livro = Books.objects.get(id=pk).delete()
+    return redirect (reverse_lazy('home'))
