@@ -8,14 +8,20 @@ class CadastroNovoLivro(forms.ModelForm):
 
     def __init__(self,*args, **kwargs, ):
         super().__init__(*args,**kwargs)
-        # self.fields['user'].widget = forms.HiddenInput()
         self.fields['category'].label = "Categoria"
+        self.fields['user'].widget = forms.HiddenInput()
+      
 
 class NewCategoryForm (forms.ModelForm):
     class Meta:
         model = Category
         fields = "__all__"
-        widgets = {'user':forms.HiddenInput()}
+
+    def __init__(self, *args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['user'].widget = forms.HiddenInput()
+        self.fields['description'].label = 'Descrição'
+        self.fields['name'].label = 'Nome da Categoria'
 
 class NewAuthorForm (forms.ModelForm):
     class Meta:

@@ -8,19 +8,19 @@
 
 <div class="d-flex  mt-3 flex-wrap justify-content-between ">
   {% for book in books %}
-    <div class="card m-2" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{ book.name }}</h5>
-        <p class="card-text">Descrição sobre o livro aqui!</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>Categoria:</b> {{ book.category }}</li>
-        <li class="list-group-item"><b>Autor:</b> {{ book.author }}</li>
-      </ul>
-      <div class="card-body">
-        <a href="{% url 'detail_book' book.id %}" class="card-link">Ver Detalhes!</a>
-      </div>
+  <div class="card" style="width: 18rem;">
+    <img src="{{book.img.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{book.name}}</h5>
     </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b>Autor: </b>{{book.author}}</li>
+      <li class="list-group-item"><b>Categoria: </b>{{book.category}}</li>
+    </ul>
+    <div class="card-body j"> 
+      <a href="{% url 'detail_book' book.pk %}" class="btn btn-secondary justify-content-center">Ver Detalhes</a>
+    </div>
+  </div>
     {% if forloop.counter|divisibleby:4 and not forloop.last %}
       </div><div class="d-flex  mt-3 flex-wrap justify-content-between ">
     {% endif %}
