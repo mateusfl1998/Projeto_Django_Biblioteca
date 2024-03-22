@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import Users
-from datetime import date 
+from datetime import date, datetime
 
 
 class Author(models.Model):
@@ -28,7 +28,7 @@ class Books(models.Model):
 
     def __str__(self):
         return self.name
-
+    
 class LoanInformations(models.Model):
     choices = (
         ('P','Péssimo'),
@@ -37,8 +37,8 @@ class LoanInformations(models.Model):
         ('O','Ótimo'),
     )
     renter_name = models.CharField(max_length=30)
-    loan_date = models.DateField()
-    return_data = models.DateField()
+    loan_date = models.DateField(default=datetime.datetime.now())
+    return_data = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Books, on_delete=models.CASCADE )
     user = models.ForeignKey(Users, on_delete=models.CASCADE) 
     avaliacao = models.CharField(max_length=1, choices=choices)
