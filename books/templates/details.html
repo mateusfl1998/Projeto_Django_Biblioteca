@@ -3,6 +3,7 @@
 
 {% block content %}
 
+
 <div class="container">
 <BR>
 Nome:<input style = "width:50%" class="form-control" type="text" value="{{book.name}}">
@@ -25,12 +26,37 @@ Categoria:
         {%endif%}
         {%endfor%}
 </select>
-
 <br>
-Data do Emprestimo:<input style = "width:40%" class="form-control" type="text" value="{{loan.loan_date}}">
-<br>
-Data de Devolução:<input style = "width:40%" class="form-control" type="text" value="{{loan.return_data}}">
-<br>
-
+<div>
+        <a class="btn btn-success text-light" >Salvar</a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+          Excluir o livro
+        </button>
+        
 </div>
+</div>
+
+<!--Modal Exclusão de Livro-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja excluir o livro?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          
+          Tem certeza que deseja excluir o livro: <b> {{book.name}}</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Sair</button>
+          <a href="{% url 'excluir_livro' book.pk %}" type="submit" class="btn btn-danger">Excluir</a>
+        </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}

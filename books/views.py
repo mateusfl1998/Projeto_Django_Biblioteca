@@ -4,6 +4,7 @@ from books.models import Books, LoanInformations, Category, Author
 from django.views.generic import DetailView, CreateView
 from .forms import NewCategoryForm, NewAuthorForm
 from django.urls import reverse_lazy
+from .models import Users
 
 
 
@@ -11,12 +12,34 @@ class BookDetailView(DetailView):
     model = Books
     template_name = 'details.html'
 
-class NewCategory(CreateView):
-    model = Category
-    form_class = NewCategoryForm
-    template_name = 'new_category.html'
-    success_url = reverse_lazy('home')
+def cadastrar_categoria(request):
+    form = NewCategoryForm(request.POST)
+    name = form.data['name']
+    user_id = form.data['user']
+    user = Users.objects.get(id=user_id)
+    descricao = form.data['descricao']
+    categoria = Category(name=name,description=descricao, user=user)
+    categoria.save()
+    print(name,descricao,user)
+    return HttpResponse('sucesso')
 
+<<<<<<< HEAD
+def cadastrar_emprestimo(request):
+    return HttpResponse('TESTE')
+
+def cadastrar_autor(request):
+    if request.method == "POST":
+        autor = request.POST.get('autor')
+        user_id = request.POST.get('user')
+        user = Users.objects.get(id=user_id)
+        autor_salva = Author(name=autor, user=user)
+        autor_salva.save()
+        print(autor,user_id)
+        return HttpResponse(f'{autor}, {user_id}')
+
+def cadastrar_emprestimo(request):
+    return HttpResponse('teste')
+=======
     def dispatch(self, request, *args, **kwargs):
         # Gerar a variável para armazenar o ID do usuário
         self.user_id = request.session.get('user')
@@ -42,3 +65,4 @@ class NewAuthor(CreateView):
         initial = {'user':self.user_id}
         return initial
     
+>>>>>>> d74c26f852ab527e7bf82b4686ece52613a36a80

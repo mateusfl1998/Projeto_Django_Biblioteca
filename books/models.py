@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import Users
-from datetime import date 
+from datetime import date, datetime
 
 
 class Author(models.Model):
@@ -9,21 +9,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-        
-    class Meta:
-        verbose_name = 'Autor'
-        verbose_name_plural = 'Autores'
 
-class RenterInformations(models.Model):
-    name = models.CharField(max_length = 100)
-    phone_number = models.IntegerField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = 'Informações de Locatário'
-    
-    def __str__(self):
-        return f'{self.name}| {self.phone_number} '
 
 
 class Category(models.Model):
@@ -43,19 +29,20 @@ class Books(models.Model):
 
     def __str__(self):
         return self.name
-
+    
 class LoanInformations(models.Model):
-    renter_information = models.ForeignKey(RenterInformations, on_delete=models.DO_NOTHING)
-    loan_date = models.DateField()
-    return_data = models.DateField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    choices = (
+        ('P','Péssimo'),
+        ('R','Ruim'),
+        ('B','Bom'),
+        ('O','Ótimo'),
+    )
+    renter_name = models.CharField(max_length=30)
+    loan_date = models.DateField(default=datetime.datetime.now())
+    return_data = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Books, on_delete=models.CASCADE )
-
-    def __str__(self):
-        return self.renter_information
-
-    class Meta:
-        verbose_name = 'Empréstimo'
+    user = models.ForeignKey(Users, on_delete=models.CASCADE) 
+    avaliacao = models.CharField(max_length=1, choices=choices)
     
 def __str__(self):
     return f'{self.book}'

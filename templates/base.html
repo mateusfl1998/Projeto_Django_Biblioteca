@@ -32,7 +32,7 @@
                             {% if request.session.user %}
                             <li class="nav-item">
                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                Cadastrar Livro
+                                Cadastrar
                               </button>
                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
                                 Cadastrar Categoria
@@ -70,21 +70,87 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastrar um novo livro!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cadastrar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'cadastrar_livro' %}" method="POST">
-          {% csrf_token %}
-          {{form}}
+        <div class = "d-flex justify-content-center">
+        <button onclick="mostrar_form(1)" class="btn btn-primary m-1">Livro</button>
+        <button onclick="mostrar_form(2)" class="btn btn-warning m-1">Categoria</button>
+        <button onclick="mostrar_form(3)" class="btn btn-info m-1">Autor</button>
+        <button onclick="mostrar_form(4)" class="btn btn-success m-1">Emprestimo</button>
+        </div>
+                <div style="display: none;" id="livro">
+                <form action="{% url 'cadastrar_livro' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="success"><h4 class="fs-3">Cadastrar novo Livro!</h4></div>
+                  <table>{{form.as_table}}</table>
+                </form>
+                </div>
+                  
 
-        </div>
+                    <div style="display: none;" id="categoria">
+                        <form action="{% url 'cadastrar_categoria' %}" method="POST">
+                          {% csrf_token %}
+                          <div class="success">
+                            <h4 class="fs-3">Cadastrar Categoria</h4>
+                          </div>
+                          <table>
+                            {{form_categoria.as_table}}
+                          </table>
+                          <div class="d-flex justify-content-end m-3" >
+                            <input type="hidden" name="user" value="{{user.id}}">
+                            <input class="btn btn-success" type="submit"  value="Enviar">
+                          </div>
+                          </div>
+                        </form>
+                      </div>
+                    
+                      
+
+                          <div style="display: none;" id="autor">
+                            <form action="{% url 'cadastrar_autor' %}" method="POST">
+                              {% csrf_token %}
+                          
+                              Nome: <input type="text" placeholder="Nome do Autor" name="autor">
+                              <input type="hidden" name="user" value="{{user.id}}">
+                             
+                                <div>
+                                        
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                  <input class="btn btn-success m-3" type="submit"  value="Enviar">
+                                </div>
+                            </form>
+                            </div>
+
+                                <div style="display: none;" id="emprestimo">
+                                  <form action="{% url 'cadastrar_emprestimo' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div>Nome do Locatário : <input type="text" placeholder="Nome do Locatário" name="renter_name">
+                                  <div>
+                                      Livros: 
+                                  
+                                      <select name="livros" id="">
+                                        <option value="">----</option>
+                                        {% for book in books%}
+                                        <option value="{{book.id}}">{{book.name}}</option>
+                                                                                {% endfor%}
+                                      </select>
+                                      
+                                    </div>
+                                    <div class="d-flex m-3">
+                                      <input class="btn btn-success" type="submit"  value="Enviar">
+                                    </div>
+                                  </form>
+                                  </div>
+
+       
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Cadastrar Livro</button>
-        </div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+                </div>
       </form>
     </div>
   </div>
@@ -142,10 +208,38 @@
   </div>
 </div>
   
+<script>
+  function mostrar_form(v1){
+    livro = document.getElementById('livro')
+    categoria = document.getElementById('categoria')
+    autor = document.getElementById('autor')
+    emprestimo = document.getElementById('emprestimo')
+
+    if(v1 == 1){
+      livro.style.display = 'block';
+      categoria.style.display = 'None';
+      autor.style.display = 'none';
+      emprestimo.style.display = 'none'
+    }else if(v1 == 2){
+      categoria.style.display = 'block';
+      livro.style.display = 'none';
+      autor.style.display = 'none';
+      emprestimo.style.display = 'none'
+    }else if(v1 == 3){
+      autor.style.display = 'block'
+      livro.style.display = 'none';
+      categoria.style.display = 'None';
+      emprestimo.style.display = 'none'
+    }else if(v1 ==4){
+      emprestimo.style.display = 'block'
+      livro.style.display = 'none';
+      categoria.style.display = 'None';
+      autor.style.display = 'none';
+      
+      }
+    }
   
-  
-  
-  
+</script>
   
   
   
