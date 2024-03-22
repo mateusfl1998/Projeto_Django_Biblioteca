@@ -34,7 +34,12 @@
                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Cadastrar
                               </button>
-
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                                Cadastrar Categoria
+                              </button>
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                                Cadastrar Autor
+                              </button>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" href="{% url 'logout'%}">Sair</a>
@@ -150,9 +155,58 @@
     </div>
   </div>
 </div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cadastrar categoria!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'cadastrar_categoria' %}" method="POST">
+          {% csrf_token %}
+          {{form1}}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Cadastrar Livro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
   
   
   
+   <!-- Modal -->
+ <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cadastrar novo Autor!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'cadastrar_author' %}" method="POST">
+          {% csrf_token %}
+          {{form2}}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Cadastrar Livro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
   
 <script>
   function mostrar_form(v1){

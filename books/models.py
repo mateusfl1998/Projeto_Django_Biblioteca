@@ -14,7 +14,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=150)
+    description = models.CharField(max_length=150, blank=True, null=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -24,6 +24,7 @@ class Books(models.Model):
     name = models.CharField(max_length = 100, verbose_name = 'Nome do Livro:'  )
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name = 'Autor')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='capa_livro', null=True,blank=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE, verbose_name = 'Cadastrado por')
 
     def __str__(self):
