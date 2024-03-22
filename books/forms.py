@@ -11,12 +11,15 @@ class CadastroNovoLivro(forms.ModelForm):
         # self.fields['user'].widget = forms.HiddenInput()
         self.fields['category'].label = "Categoria"
 
-class NewCategoryForm (forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = "__all__"
-        widgets = {'user':forms.HiddenInput()}
+class NewCategoryForm (forms.Form):
+    name = forms.CharField(max_length=30)
+    descricao = forms.CharField(max_length=100)
 
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['descricao'].widget = forms.Textarea()
+        self.fields['name'].label = "Nome"
+        self.fields['descricao'].label = "Descrição"
     
             
         

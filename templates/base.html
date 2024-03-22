@@ -81,29 +81,65 @@
                 <form action="{% url 'cadastrar_livro' %}" method="POST">
                   {% csrf_token %}
                   <div class="success"><h4 class="fs-3">Cadastrar novo Livro!</h4></div>
-                  {{form}}
+                  <table>{{form.as_table}}</table>
+                </form>
                 </div>
                   
 
                     <div style="display: none;" id="categoria">
-                      <form action="{% url 'cadastrar_livro' %}" method="POST">
-                        {% csrf_token %}
-                      
-                        categoria
+                        <form action="{% url 'cadastrar_categoria' %}" method="POST">
+                          {% csrf_token %}
+                          <div class="success">
+                            <h4 class="fs-3">Cadastrar Categoria</h4>
+                          </div>
+                          <table>
+                            {{form_categoria.as_table}}
+                          </table>
+                          <div class="d-flex justify-content-end m-3" >
+                            <input type="hidden" name="user" value="{{user.id}}">
+                            <input class="btn btn-success" type="submit"  value="Enviar">
+                          </div>
+                          </div>
+                        </form>
                       </div>
+                    
+                      
 
                           <div style="display: none;" id="autor">
-                            <form action="{% url 'cadastrar_livro' %}" method="POST">
+                            <form action="{% url 'cadastrar_autor' %}" method="POST">
                               {% csrf_token %}
                           
-                              cadastrar autor
+                              Nome: <input type="text" placeholder="Nome do Autor" name="autor">
+                              <input type="hidden" name="user" value="{{user.id}}">
+                             
+                                <div>
+                                        
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                  <input class="btn btn-success m-3" type="submit"  value="Enviar">
+                                </div>
+                            </form>
                             </div>
 
                                 <div style="display: none;" id="emprestimo">
-                                  <form action="{% url 'cadastrar_livro' %}" method="POST">
+                                  <form action="{% url 'cadastrar_emprestimo' %}" method="POST">
                                     {% csrf_token %}
-                               
-                                    cadastrar emprestimo
+                                    <div>Nome do Locatário : <input type="text" placeholder="Nome do Locatário" name="renter_name">
+                                  <div>
+                                      Livros: 
+                                  
+                                      <select name="livros" id="">
+                                        <option value="">----</option>
+                                        {% for book in books%}
+                                        <option value="{{book.id}}">{{book.name}}</option>
+                                                                                {% endfor%}
+                                      </select>
+                                      
+                                    </div>
+                                    <div class="d-flex m-3">
+                                      <input class="btn btn-success" type="submit"  value="Enviar">
+                                    </div>
+                                  </form>
                                   </div>
 
        
